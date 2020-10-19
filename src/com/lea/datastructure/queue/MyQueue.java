@@ -22,12 +22,8 @@ public class MyQueue {
     public void enqueue(int e) {
         if (rear >= queue.length)
             throw new RuntimeException("队列满了");
-        if (front == 0 && rear == 0) {
-            // 队列是空的
-            queue[rear] = e;
-        } else {
-            queue[rear] = e;
-        }
+        // 队列是空的
+        queue[rear] = e;
         rear++;
     }
 
