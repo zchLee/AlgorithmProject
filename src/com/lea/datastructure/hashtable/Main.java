@@ -1,5 +1,7 @@
 package com.lea.datastructure.hashtable;
 
+import java.util.HashMap;
+
 /**
  * @author lzc
  * @create 2020-10-19 22:53
@@ -16,4 +18,8 @@ package com.lea.datastructure.hashtable;
  */
 public class Main {
 
+    public static void main(String[] args) {
+        HashMap<Object, Object> map = new HashMap<>(12);
+        map.put("key", "value");
+    }
 }
