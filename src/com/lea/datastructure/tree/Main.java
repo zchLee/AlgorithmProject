@@ -35,11 +35,16 @@ public class Main {
         Integer[] tree = new Integer[]{3,2,9,null,null,10,null,null,8,null,4};
         LinkedList<Integer> inputList = new LinkedList<>(Arrays.asList(tree));
         BinaryTree.TreeNode treeNode = BinaryTree.createBinaryTree(inputList);
-        System.out.println("前序遍历");
+        System.out.print("\n前序遍历 : ");                  // 根--》 左--》 右
         BinaryTree.preOrderTraveral(treeNode);
-        System.out.println("中序遍历");
+        System.out.print("\n利用栈实现前序遍历 : ");
+        BinaryTree.preOrderTraveralWithStack(treeNode);
+        System.out.print("\n中序遍历 : ");                  // 左--》根 --》 右
         BinaryTree.inOrderTraneral(treeNode);
-        System.out.println("后序遍历");
+        System.out.print("\n利用栈实现中序遍历 : ");
+        BinaryTree.postOrderTraveralWithStack(treeNode);
+
+        System.out.print("\n后序遍历 : ");                  // 左--》右 --》 根
         BinaryTree.postOrderTraneral(treeNode);
     }
 }

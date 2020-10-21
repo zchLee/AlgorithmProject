@@ -2,6 +2,7 @@ package com.lea.datastructure.tree;
 
 import javax.swing.tree.TreeNode;
 import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * @author lzc
@@ -63,7 +64,7 @@ public class BinaryTree {
     public static void preOrderTraveral(TreeNode node) {
         if (node == null)
             return;
-        System.out.println(node.data);
+        System.out.print(node.data + "\t");
         preOrderTraveral(node.leftChild);
         preOrderTraveral(node.rightChild);
     }
@@ -77,7 +78,7 @@ public class BinaryTree {
         if (node == null)
             return;
         inOrderTraneral(node.leftChild);
-        System.out.println(node.data);
+        System.out.print(node.data + "\t");
         inOrderTraneral(node.rightChild);
     }
 
@@ -92,7 +93,51 @@ public class BinaryTree {
             return;
         postOrderTraneral(node.leftChild);
         postOrderTraneral(node.rightChild);
-        System.out.println(node.data);
+        System.out.print(node.data + "\t");
+    }
+
+    // 利用栈后入先出的特点 实现前序遍历二叉树
+    public static void preOrderTraveralWithStack(TreeNode treeNode) {
+        Stack<TreeNode> stack = new Stack<>();
+        // 出栈操作
+        while (treeNode != null || !stack.isEmpty()) {
+            // 一直输出左子树，并把节点放入stack中
+            while (treeNode != null) {
+                System.out.print(treeNode.data + "\t");
+                stack.push(treeNode);
+                treeNode = treeNode.leftChild;
+            }
+            // 节点遍历完了左孩子，从栈中取出数据回溯右孩子
+            if (!stack.isEmpty()) {
+                treeNode = stack.pop();
+                // 开始一直遍历右孩子
+//                System.out.println(treeNode.data);  此处打印是答应重复的数据，错了
+                treeNode = treeNode.rightChild;
+            }
+
+        }
+    }
+
+
+    public static void postOrderTraveralWithStack(TreeNode treeNode) {
+        Stack<TreeNode> stack = new Stack<>();
+        // 出栈操作
+        while (treeNode != null || !stack.isEmpty()) {
+            // 一直找左子树，并把节点放入stack中
+            while (treeNode != null) {
+//                System.out.print(treeNode.data + "\t");
+                stack.push(treeNode);
+                treeNode = treeNode.leftChild;
+
+            }
+            // 节点遍历完了左孩子，从栈中取出数据回溯右孩子
+            if (!stack.isEmpty()) {
+                treeNode = stack.pop();
+                System.out.print(treeNode.data + "\t");
+                treeNode = treeNode.rightChild;
+            }
+
+        }
     }
 
     // 构建二叉树
