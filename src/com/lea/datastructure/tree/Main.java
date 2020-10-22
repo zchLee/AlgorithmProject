@@ -1,7 +1,10 @@
 package com.lea.datastructure.tree;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * @author lzc
@@ -31,20 +34,31 @@ import java.util.LinkedList;
  */
 public class Main {
 
+    private static final Integer[] tree = new Integer[]{3,2,9,null,null,10,null,null,8,null,4};
+    private static final LinkedList<Integer> inputList = new LinkedList<>(Arrays.asList(tree));
+
     public static void main(String[] args) {
-        Integer[] tree = new Integer[]{3,2,9,null,null,10,null,null,8,null,4};
-        LinkedList<Integer> inputList = new LinkedList<>(Arrays.asList(tree));
         BinaryTree.TreeNode treeNode = BinaryTree.createBinaryTree(inputList);
         System.out.print("\n前序遍历 : ");                  // 根--》 左--》 右
-        BinaryTree.preOrderTraveral(treeNode);
+        BinaryTree.preOrderTraversal(treeNode);
         System.out.print("\n利用栈实现前序遍历 : ");
-        BinaryTree.preOrderTraveralWithStack(treeNode);
+        BinaryTree.preOrderTraversalWithStack(treeNode);
         System.out.print("\n中序遍历 : ");                  // 左--》根 --》 右
-        BinaryTree.inOrderTraneral(treeNode);
+        BinaryTree.inOrderTraversal(treeNode);
         System.out.print("\n利用栈实现中序遍历 : ");
-        BinaryTree.postOrderTraveralWithStack(treeNode);
+        BinaryTree.postOrderTraversalWithStack(treeNode);
 
         System.out.print("\n后序遍历 : ");                  // 左--》右 --》 根
-        BinaryTree.postOrderTraneral(treeNode);
+        BinaryTree.postOrderTraversal(treeNode);
+    }
+
+    @Test
+    public void test() {
+        BinaryTree.TreeNode treeNode = BinaryTree.createBinaryTree(inputList);
+        BinaryTree.levelOrderTraversal(treeNode);
+
+        Queue<BinaryTree.TreeNode> queue = new LinkedList<>();
+        queue.offer(treeNode);
+        BinaryTree.levelOrderTraversalRecursion(queue);
     }
 }

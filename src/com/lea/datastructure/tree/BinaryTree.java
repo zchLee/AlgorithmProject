@@ -1,7 +1,9 @@
 package com.lea.datastructure.tree;
 
 import javax.swing.tree.TreeNode;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -61,12 +63,12 @@ public class BinaryTree {
         二叉树前序遍历
         输出顺序是根节点，左子节点，右子节点, 从根结点出发，找到左子节点就输出，继续找左子节点，直到叶子节点，再找叶子节点的父节点的右叶子节点
      */
-    public static void preOrderTraveral(TreeNode node) {
+    public static void preOrderTraversal(TreeNode node) {
         if (node == null)
             return;
         System.out.print(node.data + "\t");
-        preOrderTraveral(node.leftChild);
-        preOrderTraveral(node.rightChild);
+        preOrderTraversal(node.leftChild);
+        preOrderTraversal(node.rightChild);
     }
 
     /*
@@ -74,12 +76,12 @@ public class BinaryTree {
         输出顺序是 左子树、根节点、右子树
         找到最左孩子输出，再输出最左孩子的父节点，然后输出右节点
      */
-    public static void inOrderTraneral(TreeNode node) {
+    public static void inOrderTraversal(TreeNode node) {
         if (node == null)
             return;
-        inOrderTraneral(node.leftChild);
+        inOrderTraversal(node.leftChild);
         System.out.print(node.data + "\t");
-        inOrderTraneral(node.rightChild);
+        inOrderTraversal(node.rightChild);
     }
 
 
@@ -88,16 +90,16 @@ public class BinaryTree {
         输出顺序是 左子树、右子树、根节点
         找到最左孩子输出，再输出最左孩子的父节点的右节点，最后输出父节点
      */
-    public static void postOrderTraneral(TreeNode node) {
+    public static void postOrderTraversal(TreeNode node) {
         if (node == null)
             return;
-        postOrderTraneral(node.leftChild);
-        postOrderTraneral(node.rightChild);
+        postOrderTraversal(node.leftChild);
+        postOrderTraversal(node.rightChild);
         System.out.print(node.data + "\t");
     }
 
     // 利用栈后入先出的特点 实现前序遍历二叉树
-    public static void preOrderTraveralWithStack(TreeNode treeNode) {
+    public static void preOrderTraversalWithStack(TreeNode treeNode) {
         Stack<TreeNode> stack = new Stack<>();
         // 出栈操作
         while (treeNode != null || !stack.isEmpty()) {
@@ -119,7 +121,7 @@ public class BinaryTree {
     }
 
 
-    public static void postOrderTraveralWithStack(TreeNode treeNode) {
+    public static void postOrderTraversalWithStack(TreeNode treeNode) {
         Stack<TreeNode> stack = new Stack<>();
         // 出栈操作
         while (treeNode != null || !stack.isEmpty()) {
@@ -139,6 +141,51 @@ public class BinaryTree {
 
         }
     }
+
+    /*
+    层序遍历
+     */
+    public static void levelOrderTraversal(TreeNode treeNode) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(treeNode);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            System.out.print(node.data + "\t");
+            if (null != node.leftChild) {
+                queue.add(node.leftChild);
+            }
+            if (null != node.rightChild) {
+                queue.add(node.rightChild);
+            }
+        }
+        System.out.println();
+    }
+
+    // 递归实现层序遍历
+    public static void levelOrderTraversalRecursion(Queue<TreeNode> queue) {
+        if (queue.isEmpty())
+            return;
+        for (int i = 0; i < queue.size(); i++) {
+            TreeNode treeNode = queue.poll();
+            System.out.print(treeNode.data + "\t");
+            if (treeNode.leftChild != null) {
+                queue.add(treeNode.leftChild);
+            }
+            if (treeNode.rightChild != null) {
+                queue.add(treeNode.rightChild);
+            }
+        }
+        levelOrderTraversalRecursion(queue);
+//        if (null != treeNode.leftChild) {
+//            levelOrderTraversalRecursion(treeNode.leftChild);
+//        }
+//        if (null != treeNode.rightChild) {
+//            levelOrderTraversalRecursion(treeNode.rightChild);
+//        }
+//        System.out.print(treeNode.data + "\t");
+    }
+
+
 
     // 构建二叉树
     public static TreeNode createBinaryTree(LinkedList<Integer> inputList) {
