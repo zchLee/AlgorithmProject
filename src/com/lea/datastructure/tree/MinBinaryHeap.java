@@ -5,13 +5,13 @@ import java.util.Arrays;
 /**
  * @author lzc
  * @create 2020-10-26 21:25
- * 二叉堆
+ * 最小二叉堆
  *   把二叉堆。完全二叉树存储方式是顺序存储。也就是二叉堆的所有节点都存储在数组中
  *   假设一个父节点下标是 parent
  *   那么 左孩子节点的下标 = parent * 2 + 1;
  *       右孩子节点的下标 = parent * 2 + 2;
  */
-public class BinaryHeap {
+public class MinBinaryHeap {
 
     /**
      * “上浮”调整
