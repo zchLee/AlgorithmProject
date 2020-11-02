@@ -73,6 +73,38 @@ public class BubbleSort {
         }
     }
 
+    // 鸡尾酒排序 : 像钟摆一样 来回摆动排序
+    // 优势在于 大多数元素已经是有序的情况下
+    public void sort4(int[] arrays) {
+        int temp;
+        for (int i = 0; i < arrays.length / 2; i++) {
+            boolean isSorted = true;
+            // 奇数轮，从左到右比较和交换
+            for (int j = 0; j < arrays.length-i-1; j++) {
+                if (arrays[j] > arrays[j+1]) {
+                    temp = arrays[j];
+                    arrays[j] = arrays[j+1];
+                    arrays[j+1] = temp;
+                    isSorted = false;
+                }
+            }
+            if (isSorted)
+                break;
+
+            isSorted = true;
+            // 偶数轮，从右往左比较 并交换
+            for (int j = arrays.length-i-1; j > i; j--) {
+                if (arrays[j] < arrays[j-1]) {
+                    temp = arrays[j];
+                    arrays[j] = arrays[j-1];
+                    arrays[j-1] = temp;
+                    isSorted = false;
+                }
+            }
+            if (isSorted)
+                break;
+        }
+    }
 
 
     public static void main(String[] args) {
@@ -86,6 +118,9 @@ public class BubbleSort {
 //        System.out.println(Arrays.toString(arrays));
         int[] arrays = new int[]{5,1,2,7,8,9};
         bubbleSort.sort3(arrays);
+
+        arrays = new int[]{2,3,4,5,6,7,8,1,9};
+        bubbleSort.sort4(arrays);
         System.out.println(Arrays.toString(arrays));
     }
 }
