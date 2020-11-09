@@ -1,6 +1,8 @@
 package com.lea.algorithm.a1sort;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Stack;
 
 /**
  * @author lzc
@@ -81,10 +83,38 @@ public class QuickSort {
         quickSortUnilateral(arrays, startIndex, pivot - 1);
         quickSortUnilateral(arrays, pivot + 1, endIndex);
     }
+
+    // 不使用递归 完成快排
+    public static void quickSort(int[] arrays) {
+        Stack<HashMap<String, Integer>> stack = new Stack<>();
+        HashMap<String, Integer> rootParam = new HashMap<>();
+        rootParam.put("startIndex", 0);
+        rootParam.put("endIndex", arrays.length - 1);
+        stack.push(rootParam);
+        while (!stack.isEmpty()) {
+            HashMap<String, Integer> param = stack.pop();
+            // 基准数
+            int pivot = partitionUnilateral(arrays, param.get("startIndex"), param.get("endIndex"));
+            if (pivot > param.get("startIndex")) {
+                HashMap<String, Integer> leftParam = new HashMap<>();
+                leftParam.put("startIndex", 0);
+                leftParam.put("endIndex", pivot - 1);
+                stack.push(leftParam);
+            }
+            if (pivot < param.get("endIndex")) {
+                HashMap<String, Integer> rightParam = new HashMap<>();
+                rightParam.put("startIndex", pivot + 1);
+                rightParam.put("endIndex", arrays.length - 1);
+                stack.push(rightParam);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         int[] arrays = new int[] {4,1,6,5,3,2,8};
 //        quickSortDouble(arrays, 0, arrays.length - 1);
-        quickSortUnilateral(arrays, 0, arrays.length - 1);
+//        quickSortUnilateral(arrays, 0, arrays.length - 1);
+        quickSort(arrays);
         System.out.println(Arrays.toString(arrays));
     }
 }
