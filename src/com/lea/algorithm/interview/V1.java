@@ -1,4 +1,4 @@
-package com.lea.algorithm.a1sort.interview;
+package com.lea.algorithm.interview;
 
 import java.util.HashMap;
 
