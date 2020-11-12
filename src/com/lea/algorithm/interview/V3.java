@@ -33,12 +33,14 @@ package com.lea.algorithm.interview;
 public class V3 {
 
     // 1.更相减损术（有个缺点，当a = 10000，b=1时 要循环9999次）
+    // 当 a特别大，而b特别小时 会报StackOverflowError
     public static int getGreatestCommonDivisor1(int a, int b) {
         int big = a > b?a:b;
         int small = a < b?a:b;
         int diff = big - small;
-        if (diff == small)
+        if (diff == small) {
             return diff;
+        }
         return getGreatestCommonDivisor1(small, diff);
     };
 
@@ -48,7 +50,7 @@ public class V3 {
         int small = a < b?a:b;
         int remain = big % small;
         if (remain == 0)
-            return remain;
+            return small;
         return getGreatestCommonDivisor1(small, remain);
     };
 
@@ -71,9 +73,9 @@ public class V3 {
     }
 
     public static void main(String[] args) {
-        System.out.println(getGreatestCommonDivisor1(1001, 1000));
-        System.out.println(getGreatestCommonDivisor2(1001, 1000));
-        System.out.println(getGreatestCommonDivisor3(1001, 1000));
+        System.out.println(getGreatestCommonDivisor1(1000000, 1));
+//        System.out.println(getGreatestCommonDivisor2(1000000, 1));
+//        System.out.println(getGreatestCommonDivisor3(1000000, 1));
     }
 
 }
